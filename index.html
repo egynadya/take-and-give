@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Take & Give - Free Item Exchange Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 15px 0;
+      position: relative;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #FBBF24;
+      text-decoration: none;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .btn {
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-primary {
+      background-color: #FBBF24;
+      color: white;
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid #ddd;
+    }
+    
+    .hero {
+      padding: 60px 0;
+      background-color: #f9fafb;
+    }
+    
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    
+    .hero-text {
+      max-width: 600px;
+    }
+    
+    .hero-text h1 {
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: #666;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-secondary {
+      background-color: #3B82F6;
+      color: white;
+    }
+    
+    .featured {
+      padding: 60px 0;
+      background-color: #fff;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 30px;
+    }
+    
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .item-card {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .item-image {
+      height: 180px;
+      background-color: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+    }
+    
+    .item-details {
+      padding: 16px;
+    }
+    
+    .item-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .item-location {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 8px;
+    }
+    
+    .item-time {
+      font-size: 14px;
+      color: #9ca3af;
+    }
+    
+    .how-it-works {
+      padding: 60px 0;
+      background-color: #f9fafb;
+    }
+    
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .step {
+      text-align: center;
+    }
+    
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      background-color: #FEF3C7;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 30px;
+    }
+    
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+    
+    .step-description {
+      color: #6b7280;
+    }
+    
+    .categories {
+      padding: 60px 0;
+      background-color: #FEF3C7;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+    }
+    
+    .category-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .category-icon {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+    
+    .category-name {
+      font-weight: 500;
+    }
+    
+    footer {
+      background-color: #1f2937;
+      color: white;
+      padding: 60px 0 30px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #FBBF24;
+      margin-bottom: 16px;
+    }
+    
+    .footer-description {
+      color: #9ca3af;
+      max-width: 300px;
+    }
+    
+    .footer-links h3 {
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    
+    .footer-links ul {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+    
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: #FBBF24;
+    }
+    
+    .language-options {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    
+    .language-btn {
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .language-btn.active {
+      background-color: #FBBF24;
+      color: white;
+    }
+    
+    .language-btn.inactive {
+      background-color: #374151;
+      color: #9ca3af;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 16px;
+      font-size: 20px;
+    }
+    
+    .copyright {
+      text-align: center;
+      color: #6b7280;
+      padding-top: 20px;
+      border-top: 1px solid #374151;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .nav-buttons {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .hero-content {
+        flex-direction: column;
+      }
+      
+      .hero-text {
+        text-align: center;
+        margin: 0 auto;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 28px;
+      }
+      
+      .section-title {
+        font-size: 24px;
+      }
+      
+      .items-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .steps {
+        grid-template-columns: 1fr;
+      }
+      
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">Take & Give</a>
+        <div class="nav-buttons">
+          <button class="btn btn-primary">Sign Up</button>
+          <button class="btn btn-outline">Log In</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>Give and receive items for free, no limitations</h1>
+          <p>Take & Give connects people who want to give away items they no longer need with those who could use them. No restrictions, no virtual credits, just a community of sharing.</p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary">Browse Items</button>
+            <button class="btn btn-secondary">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="container">
+      <h2 class="section-title">Featured Items</h2>
+      <div class="items-grid">
+        <div class="item-card">
+          <div class="item-image">Item Image</div>
+          <div class="item-details">
+            <h3 class="item-title">Wooden Bookshelf</h3>
+            <p class="item-location">Paris • 2.5 km away</p>
+            <p class="item-time">Posted 2 days ago</p>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-image">Item Image</div>
+          <div class="item-details">
+            <h3 class="item-title">Children's Bicycle</h3>
+            <p class="item-location">Lyon • 1.8 km away</p>
+            <p class="item-time">Posted 1 day ago</p>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-image">Item Image</div>
+          <div class="item-details">
+            <h3 class="item-title">Coffee Table</h3>
+            <p class="item-location">Marseille • 3.2 km away</p>
+            <p class="item-time">Posted 3 days ago</p>
+          </div>
+        </div>
+        <div class="item-card">
+          <div class="item-image">Item Image</div>
+          <div class="item-details">
+            <h3 class="item-title">Plant Collection</h3>
+            <p class="item-location">Bordeaux • 0.5 km away</p>
+            <p class="item-time">Posted 5 hours ago</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-icon">📸</div>
+          <h3 class="step-title">1. Upload Items</h3>
+          <p class="step-description">Take photos of items you no longer need and create a listing in minutes.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">💬</div>
+          <h3 class="step-title">2. Connect</h3>
+          <p class="step-description">Chat with givers or receivers to arrange pickup details.</p>
+        </div>
+        <div class="step">
+          <div class="step-icon">🎁</div>
+          <h3 class="step-title">3. Exchange</h3>
+          <p class="step-description">Meet up to give or receive items. No limitations, no restrictions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="container">
+      <h2 class="section-title">Browse Categories</h2>
+      <div class="categories-grid">
+        <div class="category-card">
+          <div class="category-icon">🪑</div>
+          <h3 class="category-name">Furniture</h3>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">👶</div>
+          <h3 class="category-name">Kids</h3>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">👕</div>
+          <h3 class="category-name">Clothes</h3>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">📚</div>
+          <h3 class="category-name">Books</h3>
+        </div>
+        <div class="category-card">
+          <div class="category-icon">🎮</div>
+          <h3 class="category-name">Electronics</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div>
+          <div class="footer-logo">Take & Give</div>
+          <p class="footer-description">A free platform for giving and receiving items without limitations. Reducing waste and building community.</p>
+        </div>
+        <div class="footer-links">
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#">How It Works</a></li>
+            <li><a href="#">Browse Items</a></li>
+            <li><a href="#">Add Item</a></li>
+            <li><a href="#">Categories</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Language</h3>
+          <div class="language-options">
+            <button class="language-btn active">English</button>
+            <button class="language-btn inactive">Français</button>
+          </div>
+          <h3>Connect</h3>
+          <div class="social-links">
+            <a href="#" style="color: #9ca3af;">📱</a>
+            <a href="#" style="color: #9ca3af;">📘</a>
+            <a href="#" style="color: #9ca3af;">📸</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 Take & Give. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
